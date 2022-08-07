@@ -1,0 +1,39 @@
+.tab-container {
+  display: none;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.output-container {
+  resize: both;
+  overflow: auto;
+  max-width: 100%;
+  border: none;
+  padding: 0;
+}
+
+.output-container > iframe {
+  border: none;
+}
+
+.editor-container {
+  resize: both;
+  overflow: auto;
+  max-width: 100%;
+  border: none;
+}
+
+.tab-container > div {
+  padding: 6px 6px;
+  margin: 2px;
+  background-color:lightgray;
+  display: block; 
+  overflow: hidden;
+  border: none;
+  color: grey;
+}
+
+.tab-container > div.active-tab {
+  background-color:grey;
+  color: yellow;
+}
