@@ -119,8 +119,8 @@ def create_JSXGraph(id='box',
     }
     </style>
     <link rel="stylesheet" type="text/css" href="https://jsxgraph.org/distrib/jsxgraph.css" />
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"></script>
-    <script type="text/javascript" src="'''+ mathjax_url +r'''"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jsxgraph/distrib/jsxgraphcore.js"><\/script>
+    <script type="text/javascript" src="'''+ mathjax_url +r'''"><\/script>
     </head>
 <body>
 <div id="''' + id + r'''" class="jxgbox"></div>

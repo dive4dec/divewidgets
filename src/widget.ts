@@ -119,7 +119,7 @@ export class JSWidgetView extends DOMWidgetView {
 
     this.htmlView = new EditorView({
       state: EditorState.create({
-        doc: this.model.get('html'),
+        doc: this.model.get('html').replace(/\\\/script/g, '\/script'),
         extensions: [editorSetup, runKeys, html()]
       }),
       parent: this.htmlContainer
@@ -215,7 +215,7 @@ export class JSWidgetView extends DOMWidgetView {
   Update the html in the output IFrame with the model html.
   */
   private setHtml() {
-    this.outputIFrame.srcdoc = this.model.get('html');
+    this.outputIFrame.srcdoc = this.model.get('html').replace(/\\\/script/g, '\/script');
 
     this.outputIFrame.onload = (function (this: JSWidgetView) {
       this.outputDocument = this.outputIFrame.contentDocument!;
