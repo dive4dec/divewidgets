@@ -2,8 +2,12 @@ from IPython.core.magic import (Magics, magics_class, line_magic,
                                 cell_magic)
 from IPython.core.magic_arguments import (argument, magic_arguments,
                                           parse_argstring)
+from IPython.core.getipython import get_ipython
+from IPython.core.interactiveshell import InteractiveShell
 
 from .widget import create_JSXGraph, create_mermaid, create_flowchart, create_optlite
+
+from inspect import getsource
 
 # from IPython.display import IFrame, display
 # from urllib.parse import quote
@@ -69,6 +73,10 @@ class OPTMagics(Magics):
         '-h', '--height', type=int, default=700,
         help="The height of the output frame (default: 700)."
     )
+    @argument(
+        '-s', '--source', type=str, nargs='*', default=[],
+        help="Carry in the source code of a function."
+    )
     @cell_magic
     def optlite(self, line, cell):
         """Visualize the cell block of Python code with the serverless OPTLite.
@@ -76,4 +84,12 @@ class OPTMagics(Magics):
         opts = parse_argstring(self.optlite, line)
         if opts.run:
             result = self.shell.run_cell(cell)
-        return create_optlite(script=cell, live=opts.live, width=opts.width, height=opts.height)
+
+        if opts.source:
+            shell: InteractiveShell = get_ipython()
+            source = '\n'.join([getsource(shell.ev(func)) for func in opts.source]) + '\n'
+        else:
+            source = ''
+
+        script = source + cell
+        return create_optlite(script=script, live=opts.live, width=opts.width, height=opts.height)
